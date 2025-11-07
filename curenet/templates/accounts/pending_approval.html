@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Pending Approval - CureNet{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body p-5 text-center">
+                <div class="mb-4">
+                    <i class="bi bi-clock-history text-warning" style="font-size: 5rem;"></i>
+                </div>
+                <h2 class="card-title mb-3">Account Pending Approval</h2>
+                <p class="text-muted mb-4">
+                    Your doctor profile has been submitted successfully. Your account is currently pending admin approval.
+                    You will be able to login and access your dashboard once an administrator approves your account.
+                </p>
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle-fill"></i> 
+                    Please check back later or contact the administrator for more information.
+                </div>
+                <a href="{% url 'accounts:login' %}" class="btn btn-primary">
+                    <i class="bi bi-box-arrow-in-right"></i> Go to Login
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
