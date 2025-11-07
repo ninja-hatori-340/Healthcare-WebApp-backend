@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Doctor Dashboard - CureNet{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-12">
+        <h2 class="mb-4">
+            <i class="bi bi-person-badge text-primary"></i> Doctor Dashboard
+        </h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-calendar-event fs-1 text-primary mb-3"></i>
+                <h5 class="card-title">Appointments</h5>
+                <p class="card-text text-muted">Manage your appointments</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-people fs-1 text-success mb-3"></i>
+                <h5 class="card-title">Patients</h5>
+                <p class="card-text text-muted">View your patients</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="bi bi-file-earmark-medical fs-1 text-info mb-3"></i>
+                <h5 class="card-title">Medical Records</h5>
+                <p class="card-text text-muted">Access patient records</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-info-circle"></i> Profile Details</h5>
+            </div>
+            <div class="card-body">
+                {% if profile %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Username:</strong> {{ user.username }}</p>
+                            <p><strong>Email:</strong> {{ user.email }}</p>
+                            <p><strong>Name:</strong> Dr. {{ user.first_name }} {{ user.last_name }}</p>
+                            <p><strong>Role:</strong> {{ user.get_role_display }}</p>
+                            <p><strong>Status:</strong> 
+                                {% if profile.is_approved %}
+                                    <span class="badge bg-success">Approved</span>
+                                {% else %}
+                                    <span class="badge bg-warning">Pending Approval</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Specialization:</strong> {{ profile.specialization }}</p>
+                            <p><strong>Qualification:</strong> {{ profile.qualification }}</p>
+                            <p><strong>Experience:</strong> {{ profile.experience_years }} years</p>
+                            <p><strong>Clinic:</strong> {{ profile.clinic.name|default:"Not assigned" }}</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle"></i> 
+                        Profile not found. Please complete your profile.
+                        <a href="{% url 'accounts:create_doctor_profile' %}" class="btn btn-sm btn-primary ms-2">Complete Profile</a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
